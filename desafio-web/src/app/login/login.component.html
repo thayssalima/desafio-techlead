@@ -1,0 +1,32 @@
+
+
+  <form [formGroup]="formulario">
+    <div class="d-flex justify-content-center align-items-center">
+      <div class="card p-3">
+
+            <div class="form-group">
+                <label for="cpf">Cpf</label>
+                <input type="text" id="cpf" class="form-control" formControlName="cpf">
+            </div>
+            <div class="form-group">
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" class="form-control" formControlName="senha" (keyUp.enter)="enviar()"/>
+            </div>
+            <div class="form-group">
+              <button class="color-white botao-entrar" type="button" (click)="enviar()">
+                Entrar
+              </button>
+            </div>
+            <div class="form-group">
+              <button class="color-white botao-entrar" type="button" (click)="cadastroCliente()">
+                Cadastre-se
+              </button>
+            </div>
+            <div class="form-group">
+              <button class="color-white botao-entrar" type="button" (click)="recuperandoSenha()">
+                Esqueceu a senha?
+              </button>
+            </div>
+      </div>
+    </div>
+  </form>

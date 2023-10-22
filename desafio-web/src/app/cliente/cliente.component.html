@@ -1,0 +1,33 @@
+<div class="card add-livro">
+  <h5 class="card-header">Cadastro clientes</h5>
+  <div class="card-body">
+      <form id="add-form" (ngSubmit)="f.form.valid && saveCliente(f)" #f="ngForm" novalidate>
+        <div class="form-group">
+          <label for="nome">Nome</label>
+          <input type="text" [(ngModel)]="cliente.nome" id="nome" name="nome" #nome="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && nome.invalid }" placeholder="Digite o nome">
+          <div *ngIf="f.submitted && nome.invalid" class="invalid-feedback">
+          </div>
+      </div>
+        <div class="form-group">
+            <label for="cpf">Cpf</label>
+            <input type="text" [(ngModel)]="cliente.cpf" id="cpf" name="cpf" #cpf="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && cpf.invalid }" placeholder="Digite o cpf">
+            <div *ngIf="f.submitted && cpf.invalid" class="invalid-feedback">
+            </div>
+        </div>
+        <div class="form-group">
+          <label for="cpf">Senha</label>
+          <input type="text" [(ngModel)]="cliente.senha" id="senha" name="senha" #senha="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && senha.invalid }" placeholder="Digite a senha">
+          <div *ngIf="f.submitted && senha.invalid" class="invalid-feedback">
+          </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" [(ngModel)]="cliente.email" id="email" name="email" #email="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" placeholder="Digite o email">
+        <div *ngIf="f.submitted && senha.invalid" class="invalid-feedback">
+        </div>
+    </div>
+        <button type="submit" class="btn btn-primary btn-add-livro">Salvar</button>
+        <button type="reset" class="btn btn-secondary btn-add-livro" (click)="cleanForm(f)">Cancelar</button>
+      </form>
+  </div>
+</div>
