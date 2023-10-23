@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import org.hibernate.validator.constraints.br.CPF;
@@ -31,7 +32,7 @@ public class Usuario {
     private Long idUsuario;
 
     @CPF
-    @Column(name = "cpf" , length = 11)
+    @Column(name = "cpf" , length = 11 , unique = true)
     private String cpf;
 
     @Column(name = "senha" , length = 100)
@@ -49,7 +50,10 @@ public class Usuario {
     private PerfilEnum perfil;
 
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
-    private List<Livros> listaAplicacoesCliente;
+    private List<Livros> listaLivros;
+
+    @OneToOne(mappedBy = "usuario")
+    private Emprestimo emprestimo;
 
     public Usuario(String cpf, String email,String nome){
         this.cpf = cpf;
