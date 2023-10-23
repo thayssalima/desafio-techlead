@@ -1,6 +1,6 @@
 <nav aria-label="breadcrumb" style="width: 100%;">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item active" aria-current="page">Biblioteca Techlead</li>
+    <li class="breadcrumb-item custom-text" aria-current="page">Biblioteca Techlead</li>
   </ol>
   <div class="col-12 text-right">
     <button type="button" class="btn btn-danger" (click)="deslogar()">Deslogar</button>
@@ -42,7 +42,7 @@
                     <button (click)="solicitarEmprestimo(livro, dialog)">Confirmar</button>
                   </div>
                 </dialog>
-                <button type="button" (click)="dialog.showModal()">Solicitações de empréstimo</button>
+                <button type="button" class="btn btn-secondary btn-sm ml-1" (click)="dialog.showModal()">Solicitações de empréstimo</button>
               </td>
             </tr>
           </tbody>
