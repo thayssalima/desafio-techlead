@@ -9,7 +9,7 @@
 -**Encriptação de propriedades**:
 Para armazenar informações sigilosas, como a senha do usuário admin master, foi utilizada a biblioteca jasypt, que encripta a informação de forma que o código compilado consiga descriptar.
 Senha utilizada para encriptação: axshwa
-É necessário passar na execução da api a propriedade jasypt.encryptor.password=axshwa
+É necessário passar na execução da api a propriedade jasypt.encryptor.password=axshwa.
 
 -**Variáveis de ambiente**:
 Poderão ser passadas variáveis no momento da execução da aplicação:
@@ -24,7 +24,7 @@ DB_PASSWORD - Senha de acesso ao banco de dados.
 ADMIN_PASSWORD - Senha do usuário admin master do sistema, Padrão 1234.
 
 -**Flyway**:
-Versionador de banco de dados  
+Versionador de banco de dados.  
 
 
 
