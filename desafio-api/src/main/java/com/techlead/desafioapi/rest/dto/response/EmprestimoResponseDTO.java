@@ -10,8 +10,8 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel("DTO de resposta de livros")
-public class SolicitarEmprestimoResponseDTO {
+@ApiModel("DTO de resposta de empréstimo")
+public class EmprestimoResponseDTO {
     private Long idEmprestimo;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime data;
@@ -20,11 +20,17 @@ public class SolicitarEmprestimoResponseDTO {
     private String nomeUsuario;
     private String nomeLivro;
 
-    public static SolicitarEmprestimoResponseDTO converterEmprestimoDTO(Emprestimo emprestimo) {
-        SolicitarEmprestimoResponseDTO solitarEmprestimoResponseDTO =new SolicitarEmprestimoResponseDTO();
+    public static EmprestimoResponseDTO converterEmprestimoDTO(Emprestimo emprestimo) {
+        EmprestimoResponseDTO solitarEmprestimoResponseDTO =new EmprestimoResponseDTO();
         BeanUtils.copyProperties(emprestimo,solitarEmprestimoResponseDTO);
         solitarEmprestimoResponseDTO.setNomeUsuario(emprestimo.getUsuario().getNome());
         solitarEmprestimoResponseDTO.setNomeLivro(emprestimo.getLivro().getNome());
         return solitarEmprestimoResponseDTO;
     }
+
+    public EmprestimoResponseDTO (Emprestimo emprestimo) {
+        BeanUtils.copyProperties(emprestimo,this);
+        this.setNomeUsuario(emprestimo.getUsuario().getNome());
+        this.setNomeLivro(emprestimo.getLivro().getNome());
+    }  
 }

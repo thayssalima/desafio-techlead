@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.techlead.desafioapi.entity.Emprestimo;
 import com.techlead.desafioapi.entity.Usuario;
 import com.techlead.desafioapi.entity.enums.PerfilEnum;
 import com.techlead.desafioapi.exceptions.DesafioException;
@@ -95,5 +97,14 @@ public class UsuarioSrv implements UserDetailsService{
         }      
         usuarioOpt.get().setSenha(this.passwordEncoder.encode(dto.getNovaSenha()));
         repository.save(usuarioOpt.get());
+    }
+
+    public void penalizarUsuario(Usuario usuario, Integer diasPenalidade){
+        usuario.setDiasPenalidade(diasPenalidade);
+        repository.save(usuario);
+    }
+
+    public void bloqueaUsuario(Usuario usuario){
+        usuario.setBloqueado(true);
     }
 }

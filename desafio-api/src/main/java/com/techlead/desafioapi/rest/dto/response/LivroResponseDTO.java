@@ -27,6 +27,7 @@ public class LivroResponseDTO {
         livroResponseDTO.setId(livros.getIdLivros());
         return livroResponseDTO;
     }
+    
     public LivroResponseDTO (Livros livros, Usuario usuario) {
         BeanUtils.copyProperties(livros,this);
         this.setId(livros.getIdLivros());

@@ -3,10 +3,12 @@ package com.techlead.desafioapi.entity;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -39,8 +41,8 @@ public class Emprestimo {
     @JoinColumn(name = "id_livro", referencedColumnName = "id", unique = true)
     private Livros livro;
 
-    @OneToOne
-    @JoinColumn(name = "id_usuario", referencedColumnName = "id", unique = true)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id")
     private Usuario usuario;
 
     public Emprestimo(Integer diasEmprestados){
