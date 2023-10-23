@@ -31,7 +31,7 @@ public class EmprestimoSrv {
     UsuarioSrv usuarioSrv;
     public Livros disponibilidadeLivro (Long idLivro){
         Livros livro = livrosSrv.getById(idLivro);
-        if(livro.getLivroDisponivel().equals(false) && livro.getQuantidadeEstoque()>0){
+        if(livro.getLivroDisponivel().equals(false) || livro.getQuantidadeEstoque()<=0){
             throw new DesafioException("Livro indiponível para empréstimo!");
         }
         return livro;

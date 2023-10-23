@@ -27,6 +27,22 @@
               <td>
                 <button *ngIf="livro.usuarioCadastrou" type="button" class="btn btn-warning btn-sm" (click)="editLivro(livro)">Editar</button>
                 <button *ngIf="livro.usuarioCadastrou" type="button" class="btn btn-danger btn-sm ml-1" (click)="deleteLivro(livro)">Deletar</button>
+                <dialog #dialog>
+                  <div>
+                    Informe os dias a serem emprestados:
+                    <select [(ngModel)]="solicitaEmprestimo.diasEmprestados">
+                      <option value="default">Choose…</option>
+                      <option>5</option>
+                      <option>10</option>
+                      <option>15</option>
+                      <option>20</option>
+                    </select>
+                  </div>
+                  <div>
+                    <button (click)="solicitarEmprestimo(livro, dialog)">Confirmar</button>
+                  </div>
+                </dialog>
+                <button type="button" (click)="dialog.showModal()">Solicitações de empréstimo</button>
               </td>
             </tr>
           </tbody>
