@@ -1,5 +1,6 @@
 package com.techlead.desafioapi.entity;
 
+import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -49,6 +50,9 @@ public class Usuario {
 
     @Column(name = "bloqueado")
     private Boolean bloqueado;
+
+    @Column(name = "data_bloqueio")
+    private LocalDate dataBloqueio;
 
     @Column(name = "perfil")
     @Enumerated(EnumType.STRING)

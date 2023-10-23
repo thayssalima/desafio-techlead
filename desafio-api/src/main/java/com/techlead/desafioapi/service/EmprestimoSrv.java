@@ -41,6 +41,10 @@ public class EmprestimoSrv {
         Livros livro = this.disponibilidadeLivro(dto.getIdLivro());
 
         Usuario usuario = livrosSrv.getUsuarioByToken(token);
+        if(usuario.getDiasPenalidade()!= null){
+            throw new DesafioException("Usuário está impossibilitado de fazer novos empréstimos!");
+        }
+
         Emprestimo emprestimo = new Emprestimo(dto.getDiasEmprestados());
         emprestimo.setLivro(livro);
         emprestimo.setUsuario(usuario);
@@ -72,9 +76,8 @@ public class EmprestimoSrv {
     public void validarDataAtraso(Emprestimo emprestimo){
         LocalDate dataDevolucaoEsperada = emprestimo.getData().plusDays(emprestimo.getDiasEmprestados()).toLocalDate();
         LocalDate dataDevolucaoDoLivro = LocalDate.now();
-        //validar se data está correta 
+        
         if (dataDevolucaoDoLivro.isAfter(dataDevolucaoEsperada)) {
-            //validar se diferença está certa
             long daysBetween = ChronoUnit.DAYS.between(dataDevolucaoEsperada, dataDevolucaoDoLivro);
 
             if(daysBetween<= 10){
