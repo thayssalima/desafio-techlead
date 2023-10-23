@@ -1,0 +1,22 @@
+<div class="card add-livro">
+  <h5 class="card-header">Esqueci a senha</h5>
+  <div class="card-body">
+      <form id="add-form" (ngSubmit)="f.form.valid && trocaSenha(f)" #f="ngForm" novalidate>
+        <div class="form-group">
+          <label for="cpf">Cpf</label>
+          <input type="text" [(ngModel)]="esqueceuSenha.cpf" id="cpf" name="cpf" #cpf="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && cpf.invalid }" placeholder="Digite o seu cpf">
+          <div *ngIf="f.submitted && cpf.invalid" class="invalid-feedback">
+          </div>
+      </div>
+        <div class="form-group">
+            <label for="novaSenha">Nova senha</label>
+            <input type="text" [(ngModel)]="esqueceuSenha.novaSenha" id="novaSenha" name="novaSenha" #novaSenha="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && novaSenha.invalid }" placeholder="Digite a nova senha">
+            <div *ngIf="f.submitted && novaSenha.invalid" class="invalid-feedback">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-add-livro">Salvar</button>
+        <button type="reset" class="btn btn-secondary btn-add-livro" (click)="cleanForm(f)">Cancelar</button>
+      </form>
+  </div>
+</div>
+
