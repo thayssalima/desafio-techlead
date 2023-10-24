@@ -4,4 +4,5 @@ export interface Livro {
     autor: string;
     dataCadastro: Date;
     usuarioCadastrou: Boolean;
+    usuarioBibliotecario: Boolean;
 }

@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { SolicitaEmprestimo } from "../models/solicita-emprestimo";
 import { Observable , throwError} from "rxjs";
 import { retry, catchError } from 'rxjs/operators';
+import { Emprestimo } from "../models/emprestimo";
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,21 @@ export class EmprestimoService {
       retry(2),
       catchError(this.handleError)
     )
+  }
+
+  listar(): Observable<Emprestimo[]> {
+    return this.httpClient.get<Emprestimo[]>(this.url + '/lista')
+      .pipe(
+        retry(2),
+        catchError(this.handleError))
+  }
+
+  aceitarSolitacoes(emprestimos: Emprestimo): Observable<Emprestimo> {
+    return this.httpClient.put<Emprestimo>(this.url + '/' + emprestimos.idEmprestimo, this.httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      )
   }
 
   // Manipulação de erros

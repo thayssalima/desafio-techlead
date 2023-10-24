@@ -27,13 +27,13 @@ public class InserindoUsuarioAdministrador implements CommandLineRunner{
     public void run(String...args) throws Exception {
         Optional<Usuario> usuarioOpt = userRepository.findByCpf("36174272001");
         if(!usuarioOpt.isPresent()){
-            Usuario admin = new Usuario("36174272001", "administrador@gmail.com", "Admin");
+            Usuario admin = new Usuario("36174272001", "teste@gmail.com", "Admin");
             admin.setSenha(this.passwordEncoder.encode(this.adminPass));
             userRepository.save(admin);
         }
         Optional<Usuario> usuarioOptBiblio = userRepository.findByCpf("61182391001");
         if(!usuarioOptBiblio.isPresent()){
-            Usuario admin = new Usuario("61182391001", "bibliotecario@gmail.com", "Bibliotecário");
+            Usuario admin = new Usuario("61182391001", "teste@gmail.com", "Bibliotecário");
             admin.setSenha(this.passwordEncoder.encode(this.adminPass));
             admin.setPerfil(PerfilEnum.BIBLIOTECARIO);
             userRepository.save(admin);

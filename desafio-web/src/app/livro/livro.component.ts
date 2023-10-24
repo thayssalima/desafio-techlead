@@ -45,14 +45,12 @@ export class LivroComponent implements OnInit{
     }
   }
 
-  // Chama o serviço para obtém todos os livros
   getLivros() {
     this.livroService.listar().subscribe((livros: Livro[]) => {
       this.livros = livros;
     });
   }
 
-  // deleta um livro
   deleteLivro(livro: Livro) {
     this.livroService.excluir(livro).subscribe(() => {
       this.getLivros();
@@ -65,7 +63,6 @@ export class LivroComponent implements OnInit{
     console.log(this.livro);
   }
 
-  // limpa o formulario
   cleanForm(form: NgForm) {
     this.getLivros();
     form.resetForm();
