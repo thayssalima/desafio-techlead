@@ -1,5 +1,7 @@
 package com.techlead.desafioapi.service;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
@@ -42,6 +44,7 @@ public class UsuarioSrv implements UserDetailsService{
         BeanUtils.copyProperties(dto, usuario);
         usuario.setSenha(this.passwordEncoder.encode(dto.getSenha()));
         usuario.setPerfil(PerfilEnum.CLIENTE);
+        usuario.setBloqueado(false);
         repository.save(usuario);
         return UsuarioRespondeDTO.converterUsuarioDTO(usuario);
     }
@@ -61,6 +64,7 @@ public class UsuarioSrv implements UserDetailsService{
 		if (!optUser.isPresent())
 			throw new UsernameNotFoundException(cpf);
 
+        this.validaBloqueio(optUser.get());
 		Usuario user = optUser.get();
 
 		Collection<GrantedAuthority> grupos = new ArrayList<>();
@@ -95,5 +99,31 @@ public class UsuarioSrv implements UserDetailsService{
         }      
         usuarioOpt.get().setSenha(this.passwordEncoder.encode(dto.getNovaSenha()));
         repository.save(usuarioOpt.get());
+    }
+
+    public void penalizarUsuario(Usuario usuario, Integer diasPenalidade){
+        usuario.setDiasPenalidade(diasPenalidade);
+        repository.save(usuario);
+    }
+
+    public void bloqueaUsuario(Usuario usuario){
+        usuario.setBloqueado(true);
+        usuario.setDataBloqueio(LocalDate.now());
+        repository.save(usuario);
+    }
+
+    public void validaBloqueio(Usuario usuario){
+        
+        if(usuario.getBloqueado().equals(true)){
+            LocalDate dataBloqueio = usuario.getDataBloqueio();
+            if (LocalDate.now().isAfter(dataBloqueio)) {
+                long daysBetween = ChronoUnit.DAYS.between(dataBloqueio, LocalDate.now());
+                if(daysBetween >= 10){
+                    usuario.setBloqueado(false);
+                }
+            }else{
+                throw new DesafioException("Usuário bloqueado!");
+            }
+        }
     }
 }

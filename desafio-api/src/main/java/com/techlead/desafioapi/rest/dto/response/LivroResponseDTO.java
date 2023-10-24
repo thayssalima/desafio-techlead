@@ -20,6 +20,7 @@ public class LivroResponseDTO {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dataCadastro;
     private Boolean usuarioCadastrou;
+    private Boolean usuarioBibliotecario;
 
     public static LivroResponseDTO converterLivrosDTO(Livros livros) {
         LivroResponseDTO livroResponseDTO =new LivroResponseDTO();
@@ -27,6 +28,7 @@ public class LivroResponseDTO {
         livroResponseDTO.setId(livros.getIdLivros());
         return livroResponseDTO;
     }
+    
     public LivroResponseDTO (Livros livros, Usuario usuario) {
         BeanUtils.copyProperties(livros,this);
         this.setId(livros.getIdLivros());
@@ -34,6 +36,11 @@ public class LivroResponseDTO {
             this.setUsuarioCadastrou(true);
         }else{
             this.setUsuarioCadastrou(false);
+        }
+        if(usuario.getPerfil().equals(PerfilEnum.BIBLIOTECARIO)){
+            this.setUsuarioBibliotecario(true);
+        }else{
+            this.setUsuarioBibliotecario(false);
         }
     }   
 }

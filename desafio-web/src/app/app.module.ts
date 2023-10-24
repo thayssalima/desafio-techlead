@@ -11,6 +11,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import { TokenInterceptor } from './services/interceptors/token.interceptor';
 import { ClienteComponent } from './cliente/cliente.component';
 import { SenhaComponent } from './senha/senha.component';
+import { EmprestimoComponent } from './emprestimo/emprestimo.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { SenhaComponent } from './senha/senha.component';
     LivroComponent,
     LoginComponent,
     ClienteComponent,
-    SenhaComponent
+    SenhaComponent,
+    EmprestimoComponent
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import lombok.AllArgsConstructor;
@@ -34,10 +35,19 @@ public class Livros {
     @Column(name = "autor" , length = 100)
     private String autor;
 
+    @Column(name = "livro_disponivel")
+    private Boolean livroDisponivel; 
+
+    @Column(name = "quantidade_estoque")
+    private Integer quantidadeEstoque; 
+
     @CreationTimestamp
     private LocalDate dataCadastro;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_usuario", referencedColumnName = "id")
     private Usuario usuario;
+
+    @OneToOne(mappedBy = "livro")
+    private Emprestimo emprestimo;
 }

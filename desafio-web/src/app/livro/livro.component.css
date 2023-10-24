@@ -13,3 +13,10 @@
 .btn-add-livro {
   margin-right: 10px;
 }
+.custom-text{
+  color: orange;
+  font-family: roboto, cursive;
+  font-size: 18px;
+  align-items: center;
+  justify-content: center;
+}

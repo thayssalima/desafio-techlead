@@ -5,6 +5,8 @@ import { NgForm } from '@angular/forms';
 import { UsuarioAutenticadoDto } from '../models/usuario-autenticado';
 import { AutenticacaoService } from '../services/autenticacao.service';
 import {Router} from "@angular/router";
+import { EmprestimoService } from '../services/emprestimo.service';
+import { SolicitaEmprestimo } from '../models/solicita-emprestimo';
 
 @Component({
   selector: 'app-livro',
@@ -15,8 +17,11 @@ export class LivroComponent implements OnInit{
   livro = {} as Livro;
   livros: Livro[]=[];
 
+  solicitaEmprestimo = {} as SolicitaEmprestimo;
+
   usuario: UsuarioAutenticadoDto | null = null
-  constructor(private livroService: LivroService ,public autenticacaoService: AutenticacaoService,public router: Router) {}
+  constructor(private livroService: LivroService ,public autenticacaoService: AutenticacaoService,public router: Router,
+                public emprestimoService: EmprestimoService) {}
 
   ngOnInit() {
     this.getLivros();
@@ -40,14 +45,12 @@ export class LivroComponent implements OnInit{
     }
   }
 
-  // Chama o serviço para obtém todos os livros
   getLivros() {
     this.livroService.listar().subscribe((livros: Livro[]) => {
       this.livros = livros;
     });
   }
 
-  // deleta um livro
   deleteLivro(livro: Livro) {
     this.livroService.excluir(livro).subscribe(() => {
       this.getLivros();
@@ -60,7 +63,6 @@ export class LivroComponent implements OnInit{
     console.log(this.livro);
   }
 
-  // limpa o formulario
   cleanForm(form: NgForm) {
     this.getLivros();
     form.resetForm();
@@ -70,5 +72,17 @@ export class LivroComponent implements OnInit{
   deslogar() {
     localStorage.clear();
     this.router.navigate(['']);
-}
+  }
+
+  solicitarEmprestimo(livro: Livro, dialog : any) {
+    this.solicitaEmprestimo.idLivro= livro.id;
+    this.emprestimoService.solicitarEmprestimo(this.solicitaEmprestimo).subscribe(() => {
+      dialog.close()
+      alert("Empréstimo requerido!")
+    });
+  }
+
+  rotaEmprestimo(): void {
+      this.router.navigateByUrl('emprestimo');
+  }
 }

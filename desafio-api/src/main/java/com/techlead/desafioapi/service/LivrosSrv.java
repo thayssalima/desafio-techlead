@@ -33,6 +33,8 @@ public class LivrosSrv {
         Livros livros = new Livros();
         BeanUtils.copyProperties(dto, livros);
         livros.setUsuario(usuario);
+        livros.setLivroDisponivel(true);
+        livros.setQuantidadeEstoque(1);
         livros.setNome(dto.getNome().substring(0,1).toUpperCase().concat(dto.getNome().substring(1)));
         livros.setAutor(dto.getAutor().substring(0,1).toUpperCase().concat(dto.getAutor().substring(1)));
         repository.save(livros);
@@ -70,7 +72,7 @@ public class LivrosSrv {
     }
 
     public LivroResponseDTO findById(Long id){
-        Livros livros = repository.findById(id).orElseThrow(() -> new DesafioException("Livro não encontrado."));
+        Livros livros = this.getById(id);
         return LivroResponseDTO.converterLivrosDTO(livros);
     }
 
@@ -85,5 +87,9 @@ public class LivrosSrv {
     public Usuario getUsuarioByToken(String token){
         String cpfUsuario = usuarioSrv.lerToken(token).getSubject();
         return usuarioSrv.getByCpf(cpfUsuario);
+    }
+
+    public Livros getById(Long id){
+        return repository.findById(id).orElseThrow(() -> new DesafioException("Livro não encontrado."));
     }
 }

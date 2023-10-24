@@ -1,6 +1,6 @@
 <nav aria-label="breadcrumb" style="width: 100%;">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item active" aria-current="page">Biblioteca Techlead</li>
+    <li class="breadcrumb-item custom-text" aria-current="page">Biblioteca Techlead</li>
   </ol>
   <div class="col-12 text-right">
     <button type="button" class="btn btn-danger" (click)="deslogar()">Deslogar</button>
@@ -9,6 +9,7 @@
 <div class="container">
   <div class="card list-livro">
     <h5 class="card-header">Lista de livros</h5>
+    <button type="button" class="btn btn-primary btn-sm" (click)="rotaEmprestimo()">Empréstimos</button>
     <div class="card-body">
       <table class="table">
           <thead>
@@ -27,6 +28,22 @@
               <td>
                 <button *ngIf="livro.usuarioCadastrou" type="button" class="btn btn-warning btn-sm" (click)="editLivro(livro)">Editar</button>
                 <button *ngIf="livro.usuarioCadastrou" type="button" class="btn btn-danger btn-sm ml-1" (click)="deleteLivro(livro)">Deletar</button>
+                <dialog #dialog>
+                  <div>
+                    Informe os dias a serem emprestados:
+                    <select [(ngModel)]="solicitaEmprestimo.diasEmprestados">
+                      <option value="default">Choose…</option>
+                      <option>5</option>
+                      <option>10</option>
+                      <option>15</option>
+                      <option>20</option>
+                    </select>
+                  </div>
+                  <div>
+                    <button (click)="solicitarEmprestimo(livro, dialog)">Confirmar</button>
+                  </div>
+                </dialog>
+                <button type="button" class="btn btn-secondary btn-sm ml-1" (click)="dialog.showModal()">Solicitações de empréstimo</button>
               </td>
             </tr>
           </tbody>

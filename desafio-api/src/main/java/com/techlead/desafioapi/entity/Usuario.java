@@ -1,5 +1,6 @@
 package com.techlead.desafioapi.entity;
 
+import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,7 +32,7 @@ public class Usuario {
     private Long idUsuario;
 
     @CPF
-    @Column(name = "cpf" , length = 11)
+    @Column(name = "cpf" , length = 11 , unique = true)
     private String cpf;
 
     @Column(name = "senha" , length = 100)
@@ -44,12 +45,24 @@ public class Usuario {
     @Column(name = "nome" , length = 100)
     private String nome;
 
+    @Column(name = "dias_penalidade")
+    private Integer diasPenalidade;
+
+    @Column(name = "bloqueado")
+    private Boolean bloqueado;
+
+    @Column(name = "data_bloqueio")
+    private LocalDate dataBloqueio;
+
     @Column(name = "perfil")
     @Enumerated(EnumType.STRING)
     private PerfilEnum perfil;
 
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
-    private List<Livros> listaAplicacoesCliente;
+    private List<Livros> listaLivros;
+
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+    private List<Emprestimo> listaEmprestimos;
 
     public Usuario(String cpf, String email,String nome){
         this.cpf = cpf;

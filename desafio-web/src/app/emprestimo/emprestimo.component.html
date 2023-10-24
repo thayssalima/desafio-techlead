@@ -1,0 +1,39 @@
+<nav aria-label="breadcrumb" style="width: 100%;">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item custom-text" aria-current="page">Empréstimos</li>
+  </ol>
+  <div class="col-12 text-right">
+  </div>
+</nav>
+<div class="container">
+  <div class="card list-livro">
+    <h5 class="card-header">Lista de empréstimos</h5>
+    <div class="card-body">
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Status</th>
+              <th scope="col">Nome do livro</th>
+              <th scope="col">Nome do usuário</th>
+              <th scope="col">Dias de empréstimo</th>
+              <th scope="col">Data</th>
+              <th scope="col">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let emprestimo of emprestimos">
+              <td>{{emprestimo.statusEmprestimo}}</td>
+              <td>{{emprestimo.nomeLivro}}</td>
+              <td>{{emprestimo.nomeUsuario}}</td>
+              <td>{{emprestimo.diasEmprestados}}</td>
+              <td>{{emprestimo.data| date : 'dd/MM/yyyy'}}</td>
+              <td>
+                <button *ngIf="emprestimo.emprestimoAtivo" type="button" class="btn btn-warning btn-sm" (click)="aceitarSolitacoes(emprestimo)">Aceitar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+  </div>
+  <button type="button" class="btn btn-primary btn-sm" (click)="rotaLivros()">Voltar</button>
+</div>
