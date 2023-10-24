@@ -6,5 +6,4 @@ export interface Emprestimo {
   nomeUsuario: string;
   nomeLivro: string;
   statusEmprestimo: string;
-
 }

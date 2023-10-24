@@ -29,6 +29,17 @@
               <td>{{emprestimo.data| date : 'dd/MM/yyyy'}}</td>
               <td>
                 <button *ngIf="emprestimo.emprestimoAtivo" type="button" class="btn btn-warning btn-sm" (click)="aceitarSolitacoes(emprestimo)">Aceitar</button>
+                <dialog #dialog>
+                  <div>
+                    Houve perca ou danos ao livro?
+                    <input type="checkbox" [(ngModel)]="devolucao.perdaDano">
+                  </div>
+                  <div>
+                    <button type="reset" class="btn btn-secondary btn-add-livro" (click)="cleanForm()">Cancelar</button>
+                    <button type="button" class="btn btn-warning btn-add-livro" (click)="devolucaoEmprestimo(emprestimo, dialog)">Confirmar</button>
+                  </div>
+                </dialog>
+                <button type="button" class="btn btn-secondary btn-sm ml-1" (click)="dialog.showModal()">Devolução</button>
               </td>
             </tr>
           </tbody>

@@ -1,11 +1,11 @@
 import { Component , OnInit} from '@angular/core';
-import { SolicitaEmprestimo } from '../models/solicita-emprestimo';
 import { EmprestimoService } from '../services/emprestimo.service';
 import { UsuarioAutenticadoDto } from '../models/usuario-autenticado';
 import { AutenticacaoService } from '../services/autenticacao.service';
 import { Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
 import { Emprestimo } from '../models/emprestimo';
+import { Devolucao } from '../models/devolucao-emprestimo';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-emprestimo',
@@ -14,7 +14,10 @@ import { Emprestimo } from '../models/emprestimo';
 })
 export class EmprestimoComponent implements OnInit{
 
+  emprestimo = {} as Emprestimo;
   emprestimos: Emprestimo[]=[];
+
+  devolucao = {id: null, perdaDano: false} as Devolucao;
 
   usuario: UsuarioAutenticadoDto | null = null
   constructor(private emprestimoService: EmprestimoService ,public autenticacaoService: AutenticacaoService,public router: Router) {}
@@ -33,7 +36,7 @@ export class EmprestimoComponent implements OnInit{
   aceitarSolitacoes(emprestimo: Emprestimo) {
       this.emprestimoService.aceitarSolitacoes(emprestimo).subscribe({
         next: (v) => {
-          alert("Empréstimo aceito!")
+          alert("Solicitação aceita!")
           this.getEmprestimo();
         },
         error: (e) => console.error(e),
@@ -42,7 +45,20 @@ export class EmprestimoComponent implements OnInit{
     });
   }
 
+  devolucaoEmprestimo(emprestimo: Emprestimo, dialog : any) {
+    this.devolucao.id= emprestimo.idEmprestimo;
+    this.emprestimoService.devolucaoEmprestimo(this.devolucao).subscribe(() => {
+      dialog.close()
+      alert("Livro devolvido à biblioteca!")
+    });
+  }
+
   rotaLivros(): void {
     this.router.navigateByUrl('livro');
-}
+  }
+
+  cleanForm() {
+    this.getEmprestimo();
+    this.emprestimo = {} as Emprestimo;
+  }
 }

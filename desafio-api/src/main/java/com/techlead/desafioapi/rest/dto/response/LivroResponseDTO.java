@@ -21,6 +21,7 @@ public class LivroResponseDTO {
     private LocalDate dataCadastro;
     private Boolean usuarioCadastrou;
     private Boolean usuarioBibliotecario;
+    private Boolean livroDisponivel;
 
     public static LivroResponseDTO converterLivrosDTO(Livros livros) {
         LivroResponseDTO livroResponseDTO =new LivroResponseDTO();

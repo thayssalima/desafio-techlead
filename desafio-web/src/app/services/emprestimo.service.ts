@@ -4,6 +4,7 @@ import { SolicitaEmprestimo } from "../models/solicita-emprestimo";
 import { Observable , throwError} from "rxjs";
 import { retry, catchError } from 'rxjs/operators';
 import { Emprestimo } from "../models/emprestimo";
+import { Devolucao } from "../models/devolucao-emprestimo";
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,14 @@ export class EmprestimoService {
 
   aceitarSolitacoes(emprestimos: Emprestimo): Observable<Emprestimo> {
     return this.httpClient.put<Emprestimo>(this.url + '/' + emprestimos.idEmprestimo, this.httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      )
+  }
+
+  devolucaoEmprestimo(devolucaoEmprestimo: Devolucao): Observable<Emprestimo> {
+    return this.httpClient.put<Emprestimo>(this.url +'/devolucao/'+ devolucaoEmprestimo.id, JSON.stringify(devolucaoEmprestimo), this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)

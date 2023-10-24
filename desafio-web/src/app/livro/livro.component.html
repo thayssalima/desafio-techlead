@@ -8,7 +8,7 @@
 </nav>
 <div class="container">
   <div class="card list-livro">
-    <h5 class="card-header">Lista de livros</h5>
+    <h5 class="card-header">Lista de livros - Biblioteca Techlead</h5>
     <button type="button" class="btn btn-primary btn-sm" (click)="rotaEmprestimo()">Empréstimos</button>
     <div class="card-body">
       <table class="table">
@@ -40,7 +40,8 @@
                     </select>
                   </div>
                   <div>
-                    <button (click)="solicitarEmprestimo(livro, dialog)">Confirmar</button>
+                    <button type="reset" class="btn btn-secondary btn-add-livro" (click)="cleanForm(f)">Cancelar</button>
+                    <button type="button" class="btn btn-warning btn-add-livro" (click)="solicitarEmprestimo(livro, dialog)">Confirmar</button>
                   </div>
                 </dialog>
                 <button type="button" class="btn btn-secondary btn-sm ml-1" (click)="dialog.showModal()">Solicitações de empréstimo</button>

@@ -13,5 +13,6 @@ public interface LivrosRepository extends JpaRepository<Livros, Long>{
     Optional<Livros> findByNomeAndAutor(String nome, String autor);
 
     @Query("SELECT l FROM Livros l ORDER BY l.nome")
-    List<Livros>findByAllOrderByNome();
+    //List<Livros>findByAllOrderByNome();
+    List<Livros>findByLivroDisponivelOrderByNome(Boolean livroDisponivel);
 }
