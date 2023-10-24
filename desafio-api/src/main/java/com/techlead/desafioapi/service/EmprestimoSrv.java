@@ -46,6 +46,9 @@ public class EmprestimoSrv {
         }
 
         Emprestimo emprestimo = new Emprestimo(dto.getDiasEmprestados());
+        if(emprestimo.getEmprestimoAtivo().equals(true)){
+            throw new DesafioException("Empréstimo já executado para esse livro");
+        }
         emprestimo.setLivro(livro);
         emprestimo.setUsuario(usuario);
         repository.save(emprestimo);

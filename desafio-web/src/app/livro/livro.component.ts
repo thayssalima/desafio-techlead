@@ -80,5 +80,9 @@ export class LivroComponent implements OnInit{
       dialog.close()
       alert("Empréstimo requerido!")
     });
-}
+  }
+
+  rotaEmprestimo(): void {
+      this.router.navigateByUrl('emprestimo');
+  }
 }

@@ -41,4 +41,8 @@ export class EmprestimoComponent implements OnInit{
 
     });
   }
+
+  rotaLivros(): void {
+    this.router.navigateByUrl('livro');
+}
 }
