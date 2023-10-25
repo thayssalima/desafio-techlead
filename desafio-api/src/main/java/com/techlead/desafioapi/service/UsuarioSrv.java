@@ -103,6 +103,7 @@ public class UsuarioSrv implements UserDetailsService{
 
     public void penalizarUsuario(Usuario usuario, Integer diasPenalidade){
         usuario.setDiasPenalidade(diasPenalidade);
+        usuario.setDataBloqueio(LocalDate.now());
         repository.save(usuario);
     }
 
@@ -118,12 +119,27 @@ public class UsuarioSrv implements UserDetailsService{
             LocalDate dataBloqueio = usuario.getDataBloqueio();
             if (LocalDate.now().isAfter(dataBloqueio)) {
                 long daysBetween = ChronoUnit.DAYS.between(dataBloqueio, LocalDate.now());
-                if(daysBetween >= 10){
+                if(daysBetween >= 7){
                     usuario.setBloqueado(false);
+                    usuario.setDiasPenalidade(null);
+                    usuario.setDataBloqueio(null);
+                    repository.save(usuario);
                 }
             }else{
                 throw new DesafioException("Usuário bloqueado!");
             }
+        }
+    }
+
+    public void validaBloqueioEmprestimo(Usuario usuario){
+        LocalDate dataBloqueio = usuario.getDataBloqueio();
+        long daysBetween = ChronoUnit.DAYS.between(dataBloqueio, LocalDate.now());
+        if(daysBetween >= usuario.getDiasPenalidade()){
+            usuario.setDiasPenalidade(null);
+            usuario.setDataBloqueio(null);
+            repository.save(usuario);
+        }else{
+            throw new DesafioException("Usuário está impossibilitado de fazer novos empréstimos!");
         }
     }
 }

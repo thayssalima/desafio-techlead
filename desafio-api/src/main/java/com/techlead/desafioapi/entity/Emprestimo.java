@@ -40,8 +40,8 @@ public class Emprestimo {
     @Column(name = "devolvido_livro")
     private Boolean devolvidoLivro; 
 
-    @OneToOne
-    @JoinColumn(name = "id_livro", referencedColumnName = "id", unique = true)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_livro", referencedColumnName = "id")
     private Livros livro;
 
     @ManyToOne(fetch = FetchType.EAGER)

@@ -41,15 +41,28 @@ public class EmprestimoSrv {
     public EmprestimoResponseDTO solicitarEmprestimo(SolicitarEmprestimoRequestDTO dto, String token){
         Livros livro = this.disponibilidadeLivro(dto.getIdLivro());
 
+        List<Emprestimo> listaEmprestimo = repository.findByLivro_idLivros(dto.getIdLivro());
+        if(listaEmprestimo.size()>0){
+            for(Emprestimo emprestimoExiste :listaEmprestimo){
+                if(emprestimoExiste.getEmprestimoAtivo().equals(true)){
+                    throw new DesafioException("Livro indisponível no momento!");
+                }
+            }
+        }
+
         Usuario usuario = livrosSrv.getUsuarioByToken(token);
         if(usuario.getDiasPenalidade()!= null){
-            throw new DesafioException("Usuário está impossibilitado de fazer novos empréstimos!");
+            usuarioSrv.validaBloqueioEmprestimo(usuario);
         }
 
         Emprestimo emprestimo = new Emprestimo(dto.getDiasEmprestados());
         if(emprestimo.getEmprestimoAtivo().equals(true)){
             throw new DesafioException("Empréstimo já executado para esse livro");
         }
+
+        livro.setLivroDisponivel(false);
+        livrosRepository.saveAndFlush(livro);
+
         emprestimo.setLivro(livro);
         emprestimo.setUsuario(usuario);
         repository.save(emprestimo);
@@ -66,7 +79,7 @@ public class EmprestimoSrv {
         Emprestimo emprestimo = this.findById(id);
         Livros livro = livrosSrv.getById(emprestimo.getLivro().getIdLivros());
         livro.setQuantidadeEstoque(0);
-        livro.setLivroDisponivel(true);
+        livro.setLivroDisponivel(false);
         livrosRepository.save(livro);
 
         emprestimo.setEmprestimoAtivo(true);
@@ -84,7 +97,7 @@ public class EmprestimoSrv {
         
         if (dataDevolucaoDoLivro.isAfter(dataDevolucaoEsperada)) {
             long daysBetween = ChronoUnit.DAYS.between(dataDevolucaoEsperada, dataDevolucaoDoLivro);
-
+            
             if(daysBetween<= 10){
                 usuarioSrv.penalizarUsuario(emprestimo.getUsuario(), 2);
             } else if(daysBetween>10 && daysBetween<=20){
@@ -109,6 +122,7 @@ public class EmprestimoSrv {
         this.validarDataAtraso(emprestimo);
         this.validaperdaDanos(dto.getPerdaDano(), emprestimo);
         emprestimo.setDevolvidoLivro(true);
+        emprestimo.setEmprestimoAtivo(false);
         livrosSrv.retornaEstoque(emprestimo.getLivro().getIdLivros());
         repository.save(emprestimo);
     }

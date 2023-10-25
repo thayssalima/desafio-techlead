@@ -50,6 +50,7 @@ export class EmprestimoComponent implements OnInit{
     this.emprestimoService.devolucaoEmprestimo(this.devolucao).subscribe(() => {
       dialog.close()
       alert("Livro devolvido à biblioteca!")
+      this.getEmprestimo();
     });
   }
 
@@ -60,5 +61,10 @@ export class EmprestimoComponent implements OnInit{
   cleanForm() {
     this.getEmprestimo();
     this.emprestimo = {} as Emprestimo;
+  }
+
+  deslogar() {
+    localStorage.clear();
+    this.router.navigate(['']);
   }
 }

@@ -1,0 +1,4 @@
+.form-group > a.color-white.botao-entrar:first-child {
+  text-decoration: underline;
+  color: blue;
+}

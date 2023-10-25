@@ -33,7 +33,7 @@ public class LivrosSrv {
         Livros livros = new Livros();
         BeanUtils.copyProperties(dto, livros);
         livros.setUsuario(usuario);
-        livros.setLivroDisponivel(false);
+        livros.setLivroDisponivel(true);
         livros.setQuantidadeEstoque(1);
         livros.setNome(dto.getNome().substring(0,1).toUpperCase().concat(dto.getNome().substring(1)));
         livros.setAutor(dto.getAutor().substring(0,1).toUpperCase().concat(dto.getAutor().substring(1)));
@@ -97,6 +97,7 @@ public class LivrosSrv {
     public void retornaEstoque(Long id){
         Livros livro = this.getById(id);
         livro.setQuantidadeEstoque(1);
+        livro.setLivroDisponivel(true);
         repository.save(livro);
     }
 }

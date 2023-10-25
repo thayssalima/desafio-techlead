@@ -1,6 +1,7 @@
 package com.techlead.desafioapi.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import lombok.AllArgsConstructor;
@@ -48,6 +49,6 @@ public class Livros {
     @JoinColumn(name = "id_usuario", referencedColumnName = "id")
     private Usuario usuario;
 
-    @OneToOne(mappedBy = "livro")
-    private Emprestimo emprestimo;
+    @OneToMany(mappedBy = "livro", fetch = FetchType.LAZY)
+    private List<Emprestimo> listaEmprestimos;
 }
