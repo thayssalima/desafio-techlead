@@ -4,7 +4,7 @@
 
 -**Senioridade**: Pleno (Desafio concluído até o nível 2)
 
--**Tecnologias** : Java 8, sprint boot, angular, postgres, flyway, spring security jwt.
+-**Tecnologias** : Java 8, sprint boot, angular, postgres, flyway, spring security jwt, swagger.
 
 -**Encriptação de propriedades**:
 Para armazenar informações sigilosas, como a senha do usuário admin master, foi utilizada a biblioteca jasypt, que encripta a informação de forma que o código compilado consiga descriptar.
