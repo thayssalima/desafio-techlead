@@ -49,6 +49,14 @@ export class EmprestimoService {
       )
   }
 
+  desaprovaSolicitacao(emprestimos: Emprestimo): Observable<Emprestimo> {
+    return this.httpClient.put<Emprestimo>(this.url + '/desaprova/' + emprestimos.idEmprestimo, this.httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      )
+  }
+
   // Manipulação de erros
   handleError(error: HttpErrorResponse) {
     let errorMessage = '';

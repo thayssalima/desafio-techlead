@@ -48,7 +48,6 @@ public class LivrosRest {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
-
     @ApiOperation(value = "Deletar")
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

@@ -41,7 +41,6 @@ export class EmprestimoComponent implements OnInit{
         },
         error: (e) => console.error(e),
         complete: () => console.info('complete')
-
     });
   }
 
@@ -53,6 +52,17 @@ export class EmprestimoComponent implements OnInit{
       this.getEmprestimo();
     });
   }
+
+  desaprovaSolicitacao(emprestimo: Emprestimo) {
+    this.emprestimoService.desaprovaSolicitacao(emprestimo).subscribe({
+      next: (v) => {
+        alert("Solicitação de empréstimo negada!")
+        this.getEmprestimo();
+      },
+      error: (e) => console.error(e),
+      complete: () => console.info('complete')
+  });
+}
 
   rotaLivros(): void {
     this.router.navigateByUrl('livro');

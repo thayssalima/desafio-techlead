@@ -16,10 +16,11 @@ public class EmprestimoResponseDTO {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime data;
     private Integer diasEmprestados;
-    private Boolean emprestimoAtivo;
+    private Boolean emprestimoAtivoAceite;
     private String nomeUsuario;
     private String nomeLivro;
     private String statusEmprestimo;
+    private Boolean emprestimoAtivo;
 
     public static EmprestimoResponseDTO converterEmprestimoDTO(Emprestimo emprestimo) {
         EmprestimoResponseDTO solitarEmprestimoResponseDTO =new EmprestimoResponseDTO();
@@ -32,9 +33,9 @@ public class EmprestimoResponseDTO {
             solitarEmprestimoResponseDTO.setStatusEmprestimo("Iniciar");
         }
         if(emprestimo.getEmprestimoAtivo().equals(false)){
-            solitarEmprestimoResponseDTO.setEmprestimoAtivo(true);
+            solitarEmprestimoResponseDTO.setEmprestimoAtivoAceite(true);
         }else{
-            solitarEmprestimoResponseDTO.setEmprestimoAtivo(false);
+            solitarEmprestimoResponseDTO.setEmprestimoAtivoAceite(false);
         }
         return solitarEmprestimoResponseDTO;
     }
@@ -49,9 +50,9 @@ public class EmprestimoResponseDTO {
             this.setStatusEmprestimo("Iniciar");
         }
         if(emprestimo.getEmprestimoAtivo().equals(false)){
-            this.setEmprestimoAtivo(true);
+            this.setEmprestimoAtivoAceite(true);
         }else{
-            this.setEmprestimoAtivo(false);
+            this.setEmprestimoAtivoAceite(false);
         }
     }  
 }

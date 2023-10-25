@@ -126,4 +126,10 @@ public class EmprestimoSrv {
         livrosSrv.retornaEstoque(emprestimo.getLivro().getIdLivros());
         repository.save(emprestimo);
     }
+
+    public void desaprovaSolicitacao(Long id){
+        Emprestimo emprestimo = this.findById(id);
+        livrosSrv.desaprovaSolicitacaoEmprestimo(emprestimo.getLivro());
+        repository.deleteById(id);
+    }
 }

@@ -3,6 +3,7 @@ export interface Emprestimo {
   data: Date;
   diasEmprestados: number;
   emprestimoAtivo: Boolean;
+  emprestimoAtivoAceite: Boolean;
   nomeUsuario: string;
   nomeLivro: string;
   statusEmprestimo: string;

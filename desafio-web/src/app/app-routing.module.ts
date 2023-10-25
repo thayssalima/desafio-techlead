@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'livro', component: LivroComponent , canActivate: [UsuarioAutenticadoGuard]},
   { path: 'cadastro', component: ClienteComponent},
   { path: 'senha', component: SenhaComponent},
-  { path: 'emprestimo', component: EmprestimoComponent},
+  { path: 'emprestimo', component: EmprestimoComponent, canActivate: [UsuarioAutenticadoGuard]},
 ];
 
 @NgModule({

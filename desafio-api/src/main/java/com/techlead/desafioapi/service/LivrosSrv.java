@@ -93,11 +93,16 @@ public class LivrosSrv {
     public Livros getById(Long id){
         return repository.findById(id).orElseThrow(() -> new DesafioException("Livro não encontrado."));
     }
-
     public void retornaEstoque(Long id){
         Livros livro = this.getById(id);
         livro.setQuantidadeEstoque(1);
         livro.setLivroDisponivel(true);
         repository.save(livro);
+    }
+
+    public void desaprovaSolicitacaoEmprestimo(Livros livro){
+        Livros livroSolicitado = this.getById(livro.getIdLivros());
+        livroSolicitado.setLivroDisponivel(true);
+        repository.save(livroSolicitado);
     }
 }

@@ -23,7 +23,6 @@ public class AuthorizationFilter extends BasicAuthenticationFilter{
         
         this.usuarioService = usuarioService;
     }
-
     @Override
     protected void doFilterInternal(HttpServletRequest req,
                                     HttpServletResponse res,
@@ -44,7 +43,6 @@ public class AuthorizationFilter extends BasicAuthenticationFilter{
         SecurityContextHolder.getContext().setAuthentication(authentication);
         chain.doFilter(req, res);
     }  
-
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
         String token = request.getHeader(SecurityUtil.HEADER_STRING);
         
@@ -74,7 +72,6 @@ public class AuthorizationFilter extends BasicAuthenticationFilter{
         
         return null;
     }
-    
     private boolean isPreflight(HttpServletRequest request) {
         return "OPTIONS".equals(request.getMethod());
     }     

@@ -29,7 +29,8 @@
               <td>{{emprestimo.diasEmprestados}}</td>
               <td>{{emprestimo.data| date : 'dd/MM/yyyy'}}</td>
               <td>
-                <button *ngIf="emprestimo.emprestimoAtivo" type="button" class="btn btn-warning btn-sm" (click)="aceitarSolitacoes(emprestimo)">Aceitar</button>
+                <button *ngIf="emprestimo.emprestimoAtivoAceite" type="button" class="btn btn-success btn-sm" (click)="aceitarSolitacoes(emprestimo)">Aprovar</button>
+                <button *ngIf="emprestimo.emprestimoAtivoAceite" type="button" class="btn btn-danger btn-sm ml-1" (click)="desaprovaSolicitacao(emprestimo)">Desaprovar</button>
                 <dialog #dialog>
                   <div>
                     Houve perca ou danos ao livro?
@@ -40,7 +41,7 @@
                     <button type="button" class="btn btn-warning btn-add-livro" (click)="devolucaoEmprestimo(emprestimo, dialog)">Confirmar</button>
                   </div>
                 </dialog>
-                <button type="button" class="btn btn-secondary btn-sm ml-1" (click)="dialog.showModal()">Devolução</button>
+                <button *ngIf="emprestimo.emprestimoAtivo" type="button" class="btn btn-secondary btn-sm ml-1" (click)="dialog.showModal()">Devolução</button>
               </td>
             </tr>
           </tbody>
