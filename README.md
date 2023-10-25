@@ -12,7 +12,7 @@ Senha utilizada para encriptação: axshwa
 É necessário passar na execução da api a propriedade jasypt.encryptor.password=axshwa.
 
 -**Flyway**:
-Versionador de banco de dados.  
+Criação das tabelas ao rodar a api (desafio-api).
 
 -**Dados banco de dados**: 
 Foi necessário criar um banco localmente para a excução do projeto ,utilizou- se o postgres local com as seguintes informações :
