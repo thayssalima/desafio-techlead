@@ -2,7 +2,7 @@
 
 -**Cargo** : Desenvolvedor Back-end
 
--**Senioridade**: Pleno
+-**Senioridade**: Pleno (Desafio concluído até o nível 2)
 
 -**Tecnologias** : Java 8, sprint boot, angular, postgres, flyway, spring security jwt.
 
