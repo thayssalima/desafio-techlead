@@ -69,5 +69,6 @@ public class Usuario {
         this.email = email;
         this.nome = nome;
         this.perfil = PerfilEnum.ADMINISTRADOR;
+        this.bloqueado = false;
     }
 }

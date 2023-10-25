@@ -1,8 +1,6 @@
 <nav aria-label="breadcrumb" style="width: 100%;">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item custom-text" aria-current="page">Empréstimos</li>
-  </ol>
   <div class="col-12 text-right">
+    <button type="button" class="btn btn-danger" (click)="deslogar()">Deslogar</button>
   </div>
 </nav>
 <div class="container">
@@ -28,7 +26,19 @@
               <td>{{emprestimo.diasEmprestados}}</td>
               <td>{{emprestimo.data| date : 'dd/MM/yyyy'}}</td>
               <td>
-                <button *ngIf="emprestimo.emprestimoAtivo" type="button" class="btn btn-warning btn-sm" (click)="aceitarSolitacoes(emprestimo)">Aceitar</button>
+                <button *ngIf="emprestimo.emprestimoAtivoAceite" type="button" class="btn btn-success btn-sm" (click)="aceitarSolitacoes(emprestimo)">Aprovar</button>
+                <button *ngIf="emprestimo.emprestimoAtivoAceite" type="button" class="btn btn-danger btn-sm ml-1" (click)="desaprovaSolicitacao(emprestimo)">Desaprovar</button>
+                <dialog #dialog>
+                  <div>
+                    Houve perca ou danos ao livro?
+                    <input type="checkbox" [(ngModel)]="devolucao.perdaDano">
+                  </div>
+                  <div>
+                    <button type="reset" class="btn btn-secondary btn-add-livro" (click)="cleanForm()">Cancelar</button>
+                    <button type="button" class="btn btn-warning btn-add-livro" (click)="devolucaoEmprestimo(emprestimo, dialog)">Confirmar</button>
+                  </div>
+                </dialog>
+                <button *ngIf="emprestimo.emprestimoAtivo" type="button" class="btn btn-secondary btn-sm ml-1" (click)="dialog.showModal()">Devolução</button>
               </td>
             </tr>
           </tbody>

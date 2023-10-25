@@ -74,15 +74,11 @@ export class LivroComponent implements OnInit{
     this.router.navigate(['']);
   }
 
-  solicitarEmprestimo(livro: Livro, dialog : any) {
-    this.solicitaEmprestimo.idLivro= livro.id;
-    this.emprestimoService.solicitarEmprestimo(this.solicitaEmprestimo).subscribe(() => {
-      dialog.close()
-      alert("Empréstimo requerido!")
-    });
-  }
-
   rotaEmprestimo(): void {
       this.router.navigateByUrl('emprestimo');
   }
+
+  rotaSolicitacoes(): void {
+    this.router.navigateByUrl('solicitacoes');
+}
 }

@@ -13,6 +13,7 @@ import com.techlead.desafioapi.entity.Usuario;
 import com.techlead.desafioapi.exceptions.DesafioException;
 import com.techlead.desafioapi.repository.EmprestimoRepository;
 import com.techlead.desafioapi.repository.LivrosRepository;
+import com.techlead.desafioapi.rest.dto.request.DevolucaoLivroRequestDTO;
 import com.techlead.desafioapi.rest.dto.request.SolicitarEmprestimoRequestDTO;
 import com.techlead.desafioapi.rest.dto.response.EmprestimoResponseDTO;
 @Service
@@ -40,15 +41,28 @@ public class EmprestimoSrv {
     public EmprestimoResponseDTO solicitarEmprestimo(SolicitarEmprestimoRequestDTO dto, String token){
         Livros livro = this.disponibilidadeLivro(dto.getIdLivro());
 
+        List<Emprestimo> listaEmprestimo = repository.findByLivro_idLivros(dto.getIdLivro());
+        if(listaEmprestimo.size()>0){
+            for(Emprestimo emprestimoExiste :listaEmprestimo){
+                if(emprestimoExiste.getEmprestimoAtivo().equals(true)){
+                    throw new DesafioException("Livro indisponível no momento!");
+                }
+            }
+        }
+
         Usuario usuario = livrosSrv.getUsuarioByToken(token);
         if(usuario.getDiasPenalidade()!= null){
-            throw new DesafioException("Usuário está impossibilitado de fazer novos empréstimos!");
+            usuarioSrv.validaBloqueioEmprestimo(usuario);
         }
 
         Emprestimo emprestimo = new Emprestimo(dto.getDiasEmprestados());
         if(emprestimo.getEmprestimoAtivo().equals(true)){
             throw new DesafioException("Empréstimo já executado para esse livro");
         }
+
+        livro.setLivroDisponivel(false);
+        livrosRepository.saveAndFlush(livro);
+
         emprestimo.setLivro(livro);
         emprestimo.setUsuario(usuario);
         repository.save(emprestimo);
@@ -56,7 +70,7 @@ public class EmprestimoSrv {
     }
 
     public List<EmprestimoResponseDTO> listaEmprestimo() {
-        List<Emprestimo> listaEmprestimos = repository.findAllByOrderByEmprestimoAtivoAscDataDesc();
+        List<Emprestimo> listaEmprestimos = repository.findByDevolvidoLivroOrderByEmprestimoAtivoAscDataDesc(false);
 
         return listaEmprestimos.stream().map(emprestimo -> new EmprestimoResponseDTO(emprestimo)).collect(Collectors.toList());
     }
@@ -65,6 +79,7 @@ public class EmprestimoSrv {
         Emprestimo emprestimo = this.findById(id);
         Livros livro = livrosSrv.getById(emprestimo.getLivro().getIdLivros());
         livro.setQuantidadeEstoque(0);
+        livro.setLivroDisponivel(false);
         livrosRepository.save(livro);
 
         emprestimo.setEmprestimoAtivo(true);
@@ -82,7 +97,7 @@ public class EmprestimoSrv {
         
         if (dataDevolucaoDoLivro.isAfter(dataDevolucaoEsperada)) {
             long daysBetween = ChronoUnit.DAYS.between(dataDevolucaoEsperada, dataDevolucaoDoLivro);
-
+            
             if(daysBetween<= 10){
                 usuarioSrv.penalizarUsuario(emprestimo.getUsuario(), 2);
             } else if(daysBetween>10 && daysBetween<=20){
@@ -102,10 +117,19 @@ public class EmprestimoSrv {
             usuarioSrv.bloqueaUsuario(emprestimo.getUsuario());
         }
     }
-    public void devolucaoEmprestimo(Long id, Boolean perdaDano){
+    public void devolucaoEmprestimo(Long id,DevolucaoLivroRequestDTO dto){
         Emprestimo emprestimo = this.findById(id);
         this.validarDataAtraso(emprestimo);
-        this.validaperdaDanos(perdaDano, emprestimo);
+        this.validaperdaDanos(dto.getPerdaDano(), emprestimo);
+        emprestimo.setDevolvidoLivro(true);
+        emprestimo.setEmprestimoAtivo(false);
+        livrosSrv.retornaEstoque(emprestimo.getLivro().getIdLivros());
+        repository.save(emprestimo);
+    }
+
+    public void desaprovaSolicitacao(Long id){
+        Emprestimo emprestimo = this.findById(id);
+        livrosSrv.desaprovaSolicitacaoEmprestimo(emprestimo.getLivro());
         repository.deleteById(id);
     }
 }

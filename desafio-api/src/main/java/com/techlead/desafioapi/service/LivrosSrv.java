@@ -64,6 +64,7 @@ public class LivrosSrv {
         Usuario usuario = this.getUsuarioByToken(token);
         Optional<Livros> livrosOpt = repository.findById(id);
 
+        
         if(livrosOpt.get().getUsuario().equals(usuario) || usuario.getPerfil().equals(PerfilEnum.ADMINISTRADOR)){
             repository.deleteById(id);
         }else{
@@ -79,7 +80,7 @@ public class LivrosSrv {
     public List<LivroResponseDTO> listaLivros(String token) {
         Usuario usuario = this.getUsuarioByToken(token);
 
-        List<Livros> listaLivros = repository.findByAllOrderByNome();
+        List<Livros> listaLivros = repository.findByLivroDisponivelOrderByNome(false);
 
         return listaLivros.stream().map(livro -> new LivroResponseDTO(livro, usuario)).collect(Collectors.toList());
     }
@@ -91,5 +92,17 @@ public class LivrosSrv {
 
     public Livros getById(Long id){
         return repository.findById(id).orElseThrow(() -> new DesafioException("Livro não encontrado."));
+    }
+    public void retornaEstoque(Long id){
+        Livros livro = this.getById(id);
+        livro.setQuantidadeEstoque(1);
+        livro.setLivroDisponivel(true);
+        repository.save(livro);
+    }
+
+    public void desaprovaSolicitacaoEmprestimo(Livros livro){
+        Livros livroSolicitado = this.getById(livro.getIdLivros());
+        livroSolicitado.setLivroDisponivel(true);
+        repository.save(livroSolicitado);
     }
 }

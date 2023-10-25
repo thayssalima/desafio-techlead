@@ -1,6 +1,7 @@
 package com.techlead.desafioapi.rest;
 
 import org.springframework.web.bind.annotation.RestController;
+import com.techlead.desafioapi.rest.dto.request.DevolucaoLivroRequestDTO;
 import com.techlead.desafioapi.rest.dto.request.SolicitarEmprestimoRequestDTO;
 import com.techlead.desafioapi.rest.dto.response.EmprestimoResponseDTO;
 import com.techlead.desafioapi.rest.dto.response.RetornoDTO;
@@ -53,11 +54,20 @@ public class EmprestimoRest {
     }
 
     @ApiOperation(value = "Devoluções de livros")
-    @PutMapping(value = "/devolucao")
-    public RetornoDTO devolucaoEmprestimo( @RequestBody Boolean perdaDano, Long id) {
+    @PutMapping(value = "/devolucao/{id}")
+    public RetornoDTO devolucaoEmprestimo(@PathVariable Long id, @RequestBody DevolucaoLivroRequestDTO dto) {
     
-        emprestimoSrv.devolucaoEmprestimo(id, perdaDano);
+        emprestimoSrv.devolucaoEmprestimo(id, dto);
 
         return new RetornoDTO("Livro devolvido à biblioteca!");
+    }
+
+    @ApiOperation(value = "Desaprova a solicitação de um empréstimo de livro")
+    @PutMapping(value = "/desaprova/{id}")
+    public RetornoDTO desaprovaSolicitacao(@PathVariable Long id) {
+    
+        emprestimoSrv.desaprovaSolicitacao(id);
+
+        return new RetornoDTO("Solicitação de empréstimo negada!");
     }
 }

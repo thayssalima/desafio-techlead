@@ -30,7 +30,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.techlead.desafioapi.config.SpringApplicationContext;
 import com.techlead.desafioapi.entity.Usuario;
 import com.techlead.desafioapi.exceptions.DesafioException;
-import com.techlead.desafioapi.exceptions.FalhaNaAutenticacaoException;
 import com.techlead.desafioapi.rest.dto.response.LoginResponseDto;
 import com.techlead.desafioapi.rest.dto.response.LoginSuccessResponseDto;
 import com.techlead.desafioapi.service.UsuarioSrv;
@@ -52,7 +51,6 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 	public AuthenticationFilter(AuthenticationManager authenticationManager) {
 		this.authenticationManager = authenticationManager;
 	}
-
 	@Override
 	public Authentication attemptAuthentication(final HttpServletRequest req, final HttpServletResponse res)
 			throws AuthenticationException {
@@ -76,7 +74,6 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 			throw new DesafioException("Erro na autenticação");
 		}
 	}
-
 	@Override
 	protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse res, FilterChain chain,
 			Authentication authentication) throws IOException, ServletException {
@@ -113,7 +110,6 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 
 		res.addHeader("UserID", usuario.getCpf());
 	}
-
 	private boolean isPreflight(HttpServletRequest request) {
 		return "OPTIONS".equals(request.getMethod());
 	}
