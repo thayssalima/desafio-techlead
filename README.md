@@ -20,6 +20,10 @@ spring.datasource.url=jdbc:postgresql://localhost:5432/techlead
 spring.datasource.username=ENC(RkgqNMhjBj8ZBy8C09ifpMFNGd1GLmKT) /Username descriptogrador: postgres
 spring.datasource.password=ENC(wtFPkxInv5qwmABG9x+nHw==) /Senha descriptografada: 1234
 
+-**Cadastro criadosao rodar aplicação**: 
+Administrador - Cpf:36174272001 Senha: 1234 
+Bibiotecário - Cpf:61182391001  Senha: 1234 
+
 
 
 
