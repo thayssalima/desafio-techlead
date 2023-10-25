@@ -6,6 +6,7 @@ import { UsuarioAutenticadoGuard } from './services/guards/usuario-autenticado.g
 import { ClienteComponent } from './cliente/cliente.component';
 import { SenhaComponent } from './senha/senha.component';
 import { EmprestimoComponent } from './emprestimo/emprestimo.component';
+import { SolicitarComponent } from './solicitar/solicitar.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'cadastro', component: ClienteComponent},
   { path: 'senha', component: SenhaComponent},
   { path: 'emprestimo', component: EmprestimoComponent, canActivate: [UsuarioAutenticadoGuard]},
+  { path: 'solicitacoes', component: SolicitarComponent, canActivate: [UsuarioAutenticadoGuard]},
 ];
 
 @NgModule({

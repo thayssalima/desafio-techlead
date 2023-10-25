@@ -12,6 +12,7 @@ import { TokenInterceptor } from './services/interceptors/token.interceptor';
 import { ClienteComponent } from './cliente/cliente.component';
 import { SenhaComponent } from './senha/senha.component';
 import { EmprestimoComponent } from './emprestimo/emprestimo.component';
+import { SolicitarComponent } from './solicitar/solicitar.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { EmprestimoComponent } from './emprestimo/emprestimo.component';
     LoginComponent,
     ClienteComponent,
     SenhaComponent,
-    EmprestimoComponent
+    EmprestimoComponent,
+    SolicitarComponent
   ],
   imports: [
     BrowserModule,

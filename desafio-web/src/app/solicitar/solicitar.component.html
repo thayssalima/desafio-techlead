@@ -1,0 +1,50 @@
+<nav aria-label="breadcrumb" style="width: 100%;">
+  <div class="col-12 text-right">
+    <button type="button" class="btn btn-danger" (click)="deslogar()">Deslogar</button>
+  </div>
+</nav>
+<div class="container">
+  <div class="card list-livro">
+    <h5 class="card-header">Livros disponíveis para empréstimo</h5>
+    <div class="card-body">
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Título</th>
+              <th scope="col">Autor</th>
+              <th scope="col">Data de cadastro</th>
+              <th scope="col">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let livro of livros">
+              <td>{{livro.nome}}</td>
+              <td>{{livro.autor}}</td>
+              <td>{{livro.dataCadastro| date : 'dd/MM/yyyy'}}</td>
+              <td>
+                <dialog #dialog>
+                  <div>
+                    Informe os dias a serem emprestados:
+                    <select [(ngModel)]="solicitaEmprestimo.diasEmprestados">
+                      <option value="default">Choose…</option>
+                      <option>5</option>
+                      <option>10</option>
+                      <option>15</option>
+                      <option>20</option>
+                    </select>
+                  </div>
+                  <div>
+                    <button type="reset" class="btn btn-secondary btn-add-livro" (click)="cleanForm()">Cancelar</button>
+                    <button type="button" class="btn btn-warning btn-add-livro ml-1" (click)="solicitarEmprestimo(livro, dialog)">Confirmar</button>
+                  </div>
+                </dialog>
+                <button type="button" class="btn btn-warning btn-sm ml-1"  *ngIf="usuario?.perfil == 'CLIENTE'" (click)="dialog.showModal()">Solicitar empréstimo</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+  </div>
+  <button type="button" class="btn btn-primary btn-sm" (click)="rotaLivros()">Voltar</button>
+</div>
+
