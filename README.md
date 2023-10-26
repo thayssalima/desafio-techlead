@@ -37,4 +37,4 @@ Administrador - Cpf:36174272001 Senha: 1234.
 Bibiotecário - Cpf:61182391001  Senha: 1234.
 
 -**Como rodar a aplicação ao baixar**:
-Está separada as pastas em desafio-api (bakc-end) e desafio-web (front-end), para rodar o desafio-api é necessário que dentro da pasta no cmd seja rodado o comando mvn spring-boot:run, com isso é instalado o spring boot na máquina. Já no desafio-web, é preciso rodar o comando npm install.
+Estão separadas as pastas em desafio-api (back-end) e desafio-web (front-end). Para rodar o desafio-api é necessário que dentro da pasta seja rodado o comando mvn spring-boot:run, com isso é instalado o spring boot na máquina. Já no desafio-web, é preciso rodar o comando npm install.
