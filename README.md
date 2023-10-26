@@ -2,11 +2,13 @@
 
 -**Cargo** : Desenvolvedor Back-end.
 
--**Senioridade**: Pleno (Desafio concluído até o nível 2).
+-**Senioridade** : Pleno (Desafio concluído até o nível 2).
 
--**Linguagem escolhida**: Java para api, css, html e javascript utilizando o angular para front-end.
+-**Linguagem escolhida** : Java para api, css, html e javascript utilizando o angular para front-end.
 
--**Tecnologias** : Java 8, sprint boot, angular, postgres, flyway, spring security jwt, swagger.
+-**Frameworks** : Foram utilizados os frameworks spring boot para a api e o angular para o front-end. Frameworks utilizados por já ter uma certa familiriedade e por serem os utilizados na empresa que propõe o desafio.
+
+-**Tecnologias** : Java 8, sprint boot, angular, postgres, flyway, spring security, jwt, swagger.
 
 -**Encriptação de propriedades** :
 Para armazenar informações sigilosas, como a senha do usuário admin master, foi utilizada a biblioteca jasypt, que encripta a informação de forma que o código compilado consiga descriptar.
