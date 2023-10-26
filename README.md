@@ -8,7 +8,7 @@
 
 -**Encriptação de propriedades** :
 Para armazenar informações sigilosas, como a senha do usuário admin master, foi utilizada a biblioteca jasypt, que encripta a informação de forma que o código compilado consiga descriptar.
-Senha utilizada para encriptação: axshwa
+Senha utilizada para encriptação: axshwa.
 É necessário passar na execução da api a propriedade jasypt.encryptor.password=axshwa, que pode ser passada como um environment JASYPT_PASSWORD.
 
 -**Flyway** :
