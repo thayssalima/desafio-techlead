@@ -21,7 +21,7 @@ DB_DRIVER_CLASSNAME - Classe do Driver utilizado.
 DB_USERNAME - Usuário de acesso ao banco de dados.
 DB_PASSWORD - Senha de acesso ao banco de dados.
 
--**Cadastro criados ao rodar aplicação**: 
+-**Cadastro criados ao rodar aplicação** : 
 Os usuários com perfil administrador e bibliotecário estão sendo criados no momento que a aplicação é iniciada através de um CommandLineRunner do java.
 Administrador - Cpf:36174272001 Senha: 1234 
 Bibiotecário - Cpf:61182391001  Senha: 1234 
