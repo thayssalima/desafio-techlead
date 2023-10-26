@@ -1,8 +1,8 @@
 # Desafio techlead - Thayssa Lima 👩‍💻
 
--**Cargo** : Desenvolvedor Back-end
+-**Cargo** : Desenvolvedor Back-end.
 
--**Senioridade**: Pleno (Desafio concluído até o nível 2)
+-**Senioridade**: Pleno (Desafio concluído até o nível 2).
 
 -**Tecnologias** : Java 8, sprint boot, angular, postgres, flyway, spring security jwt, swagger.
 
@@ -23,5 +23,5 @@ DB_PASSWORD - Senha de acesso ao banco de dados.
 
 -**Cadastro criados ao rodar aplicação** : 
 Os usuários com perfil administrador e bibliotecário estão sendo criados no momento que a aplicação é iniciada através de um CommandLineRunner do java.
-Administrador - Cpf:36174272001 Senha: 1234 
-Bibiotecário - Cpf:61182391001  Senha: 1234 
+Administrador - Cpf:36174272001 Senha: 1234.
+Bibiotecário - Cpf:61182391001  Senha: 1234.
