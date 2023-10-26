@@ -6,15 +6,15 @@
 
 -**Tecnologias** : Java 8, sprint boot, angular, postgres, flyway, spring security jwt, swagger.
 
--**Encriptação de propriedades**:
+-**Encriptação de propriedades** :
 Para armazenar informações sigilosas, como a senha do usuário admin master, foi utilizada a biblioteca jasypt, que encripta a informação de forma que o código compilado consiga descriptar.
 Senha utilizada para encriptação: axshwa
 É necessário passar na execução da api a propriedade jasypt.encryptor.password=axshwa, que pode ser passada como um environment JASYPT_PASSWORD.
 
--**Flyway**:
+-**Flyway** :
 Para a criação das tabelas no banco de dados, foi utilizada a biblioteca flyway, um versionador que executa scripts ao iniciar a aplicação (desafio-api). Para sua execução, é necessário criar os scripts em arquivos no formato SQL dentro da pasta db/migration.
 
--**Dados banco de dados**: 
+-**Dados banco de dados** : 
 Foi utilizado o banco H2 no modo Postgres, porém as configurações de banco podem ser passadas no momento da execução da aplicação através de environments:
 DB_URL - URL de conexão com o banco de dados.
 DB_DRIVER_CLASSNAME - Classe do Driver utilizado.
