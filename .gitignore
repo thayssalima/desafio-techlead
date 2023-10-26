@@ -1,2 +1,4 @@
 .vscode
 data
+desafio-api/target
+desafio-web/node_modules
