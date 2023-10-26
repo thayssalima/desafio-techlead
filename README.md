@@ -16,9 +16,13 @@ Para a criação das tabelas no banco de dados, foi utilizada a biblioteca flywa
 
 -**Dados banco de dados** : 
 Foi utilizado o banco H2 no modo Postgres, porém as configurações de banco podem ser passadas no momento da execução da aplicação através de environments:
+
 DB_URL - URL de conexão com o banco de dados.
+
 DB_DRIVER_CLASSNAME - Classe do Driver utilizado.
+
 DB_USERNAME - Usuário de acesso ao banco de dados.
+
 DB_PASSWORD - Senha de acesso ao banco de dados.
 
 -**Cadastro criados ao rodar aplicação** : 
