@@ -2,9 +2,11 @@
 
 -**Cargo** : Desenvolvedor Back-end.
 
--**Senioridade** : Pleno (Desafio concluído até o nível 2).
+-**Senioridade** : Pleno.
 
 -**Linguagem escolhida** : Java para api, css, html e javascript utilizando o angular para front-end.
+
+-**Desafio concluído até o nível 2**
 
 -**Frameworks** : Foram utilizados os frameworks spring boot para a api e o angular para o front-end. Frameworks utilizados por já ter uma certa familiriedade e por serem os utilizados na empresa que propõe o desafio.
 
