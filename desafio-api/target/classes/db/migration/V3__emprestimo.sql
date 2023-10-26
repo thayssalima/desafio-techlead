@@ -1,6 +1,6 @@
-CREATE TABLE public.emprestimo (
+CREATE TABLE emprestimo (
 	id bigserial NOT NULL,
-	"data" timestamp NULL,
+	data_emprestimo timestamp NULL,
 	devolvido_livro bool NULL,
 	dias_emprestados int4 NULL,
 	emprestimo_ativo bool NULL,
@@ -10,9 +10,5 @@ CREATE TABLE public.emprestimo (
 );
 
 
-ALTER TABLE public.emprestimo OWNER TO postgres;
-GRANT ALL ON TABLE public.emprestimo TO postgres;
-
-
-ALTER TABLE public.emprestimo ADD CONSTRAINT fkddtboecot5bhm6igucr0j405u FOREIGN KEY (id_livro) REFERENCES public.livros(id);
-ALTER TABLE public.emprestimo ADD CONSTRAINT fks8lirup1wisehyym648mgb5qg FOREIGN KEY (id_usuario) REFERENCES public.usuario(id);
+ALTER TABLE emprestimo ADD CONSTRAINT fkddtboecot5bhm6igucr0j405u FOREIGN KEY (id_livro) REFERENCES livros(id);
+ALTER TABLE emprestimo ADD CONSTRAINT fks8lirup1wisehyym648mgb5qg FOREIGN KEY (id_usuario) REFERENCES usuario(id);

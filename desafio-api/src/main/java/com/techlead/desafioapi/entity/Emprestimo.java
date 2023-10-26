@@ -26,7 +26,7 @@ public class Emprestimo {
     @Column(name = "id")
     private Long idEmprestimo;
 
-    @Column(name = "data")
+    @Column(name = "data_emprestimo")
     private LocalDateTime data;
 
     @Column(name = "dias_emprestados")
