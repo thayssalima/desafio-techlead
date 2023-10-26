@@ -4,6 +4,8 @@
 
 -**Senioridade**: Pleno (Desafio concluído até o nível 2).
 
+-**Linguagem escolhida**: Java para api, css, html e javascript utilizando o angular para front-end.
+
 -**Tecnologias** : Java 8, sprint boot, angular, postgres, flyway, spring security jwt, swagger.
 
 -**Encriptação de propriedades** :
